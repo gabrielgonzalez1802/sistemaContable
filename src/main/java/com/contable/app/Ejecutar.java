@@ -2,14 +2,17 @@ package com.contable.app;
 
 import java.awt.EventQueue;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.contable.app.conexion.BaseDeDatos;
+import com.contable.app.dialogs.BalanceGeneral;
+import com.contable.app.dialogs.FormEgreso;
 import com.contable.app.dialogs.FormEmpleado;
+import com.contable.app.dialogs.FormIngreso;
 import com.contable.app.dialogs.ListaEmpleados;
+import com.contable.app.ingresos.IngresosImpl;
 import com.contable.app.panels.PanelInicio;
 
 import java.awt.SystemColor;
@@ -66,10 +69,6 @@ public class Ejecutar extends JFrame {
 		mnOpciones.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuBar.add(mnOpciones);
 		
-		JMenuItem mntmInicio = new JMenuItem("Inicio");
-		mntmInicio.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		mnOpciones.add(mntmInicio);
-		
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mntmSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -111,10 +110,22 @@ public class Ejecutar extends JFrame {
 		menuBar.add(mnBalanceGeneral);
 		
 		JMenuItem mntmIngresos = new JMenuItem("Ingresos");
+		mntmIngresos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FormIngreso formIngreso = new FormIngreso();
+				formIngreso.setVisible(true);
+			}
+		});
 		mntmIngresos.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnBalanceGeneral.add(mntmIngresos);
 		
 		JMenuItem mntmEgresos = new JMenuItem("Egresos");
+		mntmEgresos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FormEgreso formEgreso = new FormEgreso();
+				formEgreso.setVisible(true);
+			}
+		});
 		mntmEgresos.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnBalanceGeneral.add(mntmEgresos);
 		
@@ -123,6 +134,12 @@ public class Ejecutar extends JFrame {
 		menuBar.add(mnBalance);
 		
 		JMenuItem mntmBalanceGeneral = new JMenuItem("Balance General");
+		mntmBalanceGeneral.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BalanceGeneral balanceGeneral = new BalanceGeneral();
+				balanceGeneral.setVisible(true);
+			}
+		});
 		mntmBalanceGeneral.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnBalance.add(mntmBalanceGeneral);
 		
