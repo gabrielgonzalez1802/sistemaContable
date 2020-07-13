@@ -2,10 +2,14 @@ package com.contable.app;
 
 import java.awt.EventQueue;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.contable.app.conexion.BaseDeDatos;
+import com.contable.app.dialogs.FormEmpleado;
+import com.contable.app.dialogs.ListaEmpleados;
 import com.contable.app.panels.PanelInicio;
 
 import java.awt.SystemColor;
@@ -14,11 +18,16 @@ import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Ejecutar extends JFrame {
 
 	private static final long serialVersionUID = -3654268615867351584L;
 	private JPanel contentPane;
+	private static Ejecutar frame;
 
 	/**
 	 * Launch the application.
@@ -27,9 +36,15 @@ public class Ejecutar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ejecutar frame = new Ejecutar();
+					BaseDeDatos db = new BaseDeDatos();
+					frame = new Ejecutar();
 					frame.setResizable(false);
+					frame.setDefaultCloseOperation(0);
 					frame.setVisible(true);
+					if(!db.conectar()) {
+						JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos");
+						frame.dispose();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,39 +63,71 @@ public class Ejecutar extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnOpciones = new JMenu("Opciones");
+		mnOpciones.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuBar.add(mnOpciones);
 		
 		JMenuItem mntmInicio = new JMenuItem("Inicio");
+		mntmInicio.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOpciones.add(mntmInicio);
 		
 		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (frame.isDisplayable()) {
+	                   frame.dispose();
+	                   System.out.println("Fin de la ejecución");
+	               }
+			}
+		});
+		mntmSalir.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnOpciones.add(mntmSalir);
 		
 		JMenu mnNewMenu = new JMenu("N\u00F3mina");
+		mnNewMenu.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmListaDeEmpleados = new JMenuItem("Lista de Empleados");
+		mntmListaDeEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaEmpleados listaEmpleados = new ListaEmpleados();
+				listaEmpleados.setVisible(true);
+			}
+		});
+		mntmListaDeEmpleados.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnNewMenu.add(mntmListaDeEmpleados);
 		
 		JMenuItem mntmAgregarEmpleado = new JMenuItem("Agregar Empleado");
+		mntmAgregarEmpleado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FormEmpleado formEmpleado = new FormEmpleado();
+				formEmpleado.setVisible(true);
+			}
+		});
+		mntmAgregarEmpleado.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnNewMenu.add(mntmAgregarEmpleado);
 		
 		JMenu mnBalanceGeneral = new JMenu("Ingresos y Egresos");
+		mnBalanceGeneral.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuBar.add(mnBalanceGeneral);
 		
 		JMenuItem mntmIngresos = new JMenuItem("Ingresos");
+		mntmIngresos.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnBalanceGeneral.add(mntmIngresos);
 		
 		JMenuItem mntmEgresos = new JMenuItem("Egresos");
+		mntmEgresos.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnBalanceGeneral.add(mntmEgresos);
 		
 		JMenu mnBalance = new JMenu("Balance");
+		mnBalance.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuBar.add(mnBalance);
 		
 		JMenuItem mntmBalanceGeneral = new JMenuItem("Balance General");
+		mntmBalanceGeneral.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnBalance.add(mntmBalanceGeneral);
 		
 		JMenuItem mntmSolicitudes = new JMenuItem("Solicitudes");
+		mntmSolicitudes.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnBalance.add(mntmSolicitudes);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
