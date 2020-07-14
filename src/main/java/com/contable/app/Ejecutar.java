@@ -12,6 +12,7 @@ import com.contable.app.dialogs.FormEgreso;
 import com.contable.app.dialogs.FormEmpleado;
 import com.contable.app.dialogs.FormIngreso;
 import com.contable.app.dialogs.ListaEmpleados;
+import com.contable.app.dialogs.SolicitudAdelanto;
 import com.contable.app.ingresos.IngresosImpl;
 import com.contable.app.panels.PanelInicio;
 
@@ -144,6 +145,12 @@ public class Ejecutar extends JFrame {
 		mnBalance.add(mntmBalanceGeneral);
 		
 		JMenuItem mntmSolicitudes = new JMenuItem("Solicitudes");
+		mntmSolicitudes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SolicitudAdelanto adelanto = new SolicitudAdelanto();
+				adelanto.setVisible(true);
+			}
+		});
 		mntmSolicitudes.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		mnBalance.add(mntmSolicitudes);
 		contentPane = new JPanel();

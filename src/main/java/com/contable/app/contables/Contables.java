@@ -8,6 +8,10 @@ public class Contables {
 	private String tipo;
 	private String created;
 	
+	public Contables() {
+		this.id=0;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
