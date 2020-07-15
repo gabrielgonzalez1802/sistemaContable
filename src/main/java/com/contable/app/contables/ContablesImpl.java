@@ -3,7 +3,6 @@ package com.contable.app.contables;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Savepoint;
 import java.util.LinkedList;
 import java.util.List;
 

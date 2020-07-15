@@ -1,8 +1,12 @@
 package com.contable.app.conexion;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class BaseDeDatos {
 	
@@ -14,14 +18,24 @@ public class BaseDeDatos {
 	private int port;
 	
 	private Boolean conectado;
+	private Properties propiedades = new Properties();
 
-	
 	public BaseDeDatos() {
-		this.user="gabo";
-		this.pwd="gabo";
-		this.db="contable";
-		this.host="localhost";
-		this.port=3306;
+		try {
+			InputStream is = getClass().getResourceAsStream("/application.properties");
+			propiedades.load(is);
+			this.user=propiedades.getProperty("conexion.username");
+			this.pwd=propiedades.getProperty("conexion.pwd");
+			this.db=propiedades.getProperty("conexion.db");
+			this.host=propiedades.getProperty("conexion.host");
+			this.port=Integer.parseInt(propiedades.getProperty("conexion.port"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			conectado = false;
+		} catch (IOException e) {
+			e.printStackTrace();
+			conectado = false;
+		}
 	}
 
 	public boolean conectar() {

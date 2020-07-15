@@ -13,7 +13,6 @@ import com.contable.app.dialogs.FormEmpleado;
 import com.contable.app.dialogs.FormIngreso;
 import com.contable.app.dialogs.ListaEmpleados;
 import com.contable.app.dialogs.SolicitudAdelanto;
-import com.contable.app.ingresos.IngresosImpl;
 import com.contable.app.panels.PanelInicio;
 
 import java.awt.SystemColor;
@@ -159,9 +158,9 @@ public class Ejecutar extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblSistemaContable = new JLabel("Sistema Contable");
+		JLabel lblSistemaContable = new JLabel("CEDEA M&G");
 		lblSistemaContable.setFont(new Font("Viner Hand ITC", Font.BOLD, 45));
-		lblSistemaContable.setBounds(97, 52, 401, 42);
+		lblSistemaContable.setBounds(126, 43, 401, 42);
 		contentPane.add(lblSistemaContable);
 		
 		PanelInicio panelInicio = new PanelInicio();
